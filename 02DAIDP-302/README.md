@@ -25,7 +25,7 @@ In this workshop, you will learn how to build, use and administer an IoT Central
 
 ### Create an application
 
-Create your Microsoft Azure IoT Central application from the **Create Application** page. To create an Azure IoT Central application, you must complete all the fields on this page as below and then choose click the **Create** button.
+Create your Microsoft [Azure IoT Central application](https://apps.azureiotcentral.com/create) from the **Create Application** page. To create an Azure IoT Central application, you must complete all the fields on this page as below and then choose click the **Create** button.
 
 For the purposes of this workshop:
 
@@ -136,7 +136,7 @@ To add the temperature telemetry measurement, choose New Measurement. Then choos
 
 ![Measure](images/airconmeasure2.png)
 
-Each type of telemetry you define for a device template includes **configuration options** such as:
+Each type of telemetry you define for a device template includes [configuration options](https://docs.microsoft.com/en-us/azure/iot-central/howto-set-up-template) such as:
 
 * Display options.
 * Details of the telemetry.
@@ -165,7 +165,7 @@ To add the Fan Motor Error event measurement, choose New Measurement. Then choos
 
 ![Event Measure](images/eventmeasure.png)
 
-Each type of Event you define for a device template includes **configuration options** such as:
+Each type of Event you define for a device template includes [configuration options](https://docs.microsoft.com/en-us/azure/iot-central/howto-set-up-template) such as:
 
 * Display Name.
 * Field Name.
@@ -195,7 +195,7 @@ To add Fan Mode measurement, choose New Measurement. Then choose State as the me
 
 ![Measure State](images/measurestate.png)
 
-Each type of State you define for a device template includes configuration options such as:
+Each type of State you define for a device template includes [configuration options](https://docs.microsoft.com/en-us/azure/iot-central/howto-set-up-template) such as:
 
 * Display Name.
 * Field Name.
@@ -356,7 +356,360 @@ To view the dashboard as an operator, switch off Design Mode on the top right of
 
 ### Configure rules
 
-To start adding a rule in the Rules view, choose Rules
+1. To start adding a rule in the Rules view, choose Rules
 
 ![Chose Rules](images/choserules.png)
+
+2. To start creating the threshold-based telemetry rule, choose New Rule, then Telemetry.
+
+3. To define your rule, use the information in the following table
+
+![Rule Table](images/ruletable.png)
+
+![Rule Table](images/ruletable2.png)
+
+### Add an action
+
+When you define a rule, you also define an action to run when the rule conditions are met. In this tutorial, you add an action to send an email as a notification that the rule triggered.
+
+1.	To add an Action, scroll down on the Configure Telemetry Rule panel and choose the + next to Actions, then choose Email
+
+![Select Action](images/selectaction.png)
+
+To define your action, use the information in the following table
+
+![Action Table](images/actiontable.png)
+
+>Note: To receive an email notification, the email address must be a [user ID in the application](https://docs.microsoft.com/en-us/azure/iot-central/howto-administer), and that user must have signed in to the application at least once.
+
+![Email Action](images/emailaction.png)
+
+Choose **Save**. Your rule is listed on the Rules page
+
+![Test Rule](images/testrule.png)
+
+Test the rule:
+
+Shortly after you save the rule, it becomes live. When the conditions defined in the rule are met, your application sends a message to the email address you specified in the action.
+
+![Test Rule](images/emaildetails.png)
+
+### Customize the operator’s view
+
+To edit the dashboard, choose Dashboard
+
+![Dashboard KPI](images/dashboardkpi.png)
+
+To add a KPI tile to the dashboard, choose **KPI**
+
+![Dashboard KPI](images/kpitable.png)
+
+Choose **Save**. You can now see the KPI tile on the dashboard.
+
+![Dashboard KPI](images/maxtemp.png)
+
+To move or resize a tile on the dashboard, move the mouse pointer over the tile. You can drag the tile to a new location or resize it.
+
+![Dashboard KPI](images/targettemp.png)
+
+### Configure the default home page
+
+When a builder or operator signs in to an Azure IoT Central application, they see a home page. As a builder, you can configure the content of this home page to include the most useful and relevant content for an operator.
+
+1.	To customize the default home page, navigate to the Home page and switch Design Mode on, on the top right of the page. Upon turning on Design Mode, a panel will slide out from the right with a list of objects you can add to your Homepage.
+
+![Dashboard KPI](images/home.png)
+
+2. To customize the home page, add tiles from the Library. Choose Link and add details of your organization's web site. Then choose **Save**.
+
+![Dashboard KPI](images/configurelink.png)
+
+>Note: You can also add links to pages within your Azure IoT Central application. For example, you could add a link to a device dashboard or settings page.
+
+3.	Optionally, choose Image and upload an image to display on your home page. An image can have a URL to which you navigate when you click on it:
+
+![Dashboard KPI](images/configureimage.png)
+
+To learn more, see [How to prepare and upload images to your Azure IoT Central application](https://docs.microsoft.com/en-us/azure/iot-central/howto-prepare-images).
+
+### Preview the default home page as an operator
+
+To preview the home page as an operator, switch Design Mode off on the top right of the page.
+
+![Dashboard KPI](images/exampleimage.png)
+
+You can click on the link and image tiles to navigate to the URLs you set as a builder.
+
+### Operator
+
+#### Monitor your Devices
+
+##### Receive a notification
+
+Azure IoT Central sends notifications about devices as email messages. The builder added a rule to send a notification when the temperature in a connected air conditioner device exceeded a threshold. Check the emails sent to the account the builder chose to receive notifications.
+Open the email message you received at the end of the [Configure rules and actions for your device](https://docs.microsoft.com/en-us/azure/iot-central/tutorial-configure-rules) tutorial. In the email, choose **Click here to open your device**.
+
+![Email](images/email.png)
+
+The Device page for the Connected Air Conditioner-1 simulated device you created in the previous tutorials opens in your browser.
+
+### Investigate an issue
+
+As an operator, you can view information about the device on the Measurements, Settings, Properties, Rules, and Dashboard pages. The builder customized the Dashboard to display important information about a connected air conditioner device.
+
+Choose the Dashboard view to see information about the device.
+
+![Email](images/dashboard2.png)
+
+The chart on the dashboard shows a plot of the device temperature. You can also see the current target temperature for the device in the Set target temperature tile. You decide that the target temperature is too high.
+
+### Remediate an issue
+
+To change the target temperature of the device, use the Settings page:
+
+1.	Choose Settings. Change Set Temperature to 100. Choose Update to send the new target temperature to the device. When the device acknowledges the settings change, the status of the setting value changes to synced.
+
+![Email](images/settingsupdate.png)
+
+2. Choose Dashboard and verify the new setting value.
+
+![Email](images/dashboard_target_temp.png)
+
+
+### Add a Real Device 
+
+To add a real device to your application, you use the Connected Air Conditioner device template you created in the [Define a new device type](https://docs.microsoft.com/en-us/azure/iot-central/tutorial-define-device-type) tutorial.
+
+1.	To add a new device as an operator, choose Device Explorer in the left navigation menu. The Device Explorer shows the Connected Air Conditioner device template and the simulated device that was automatically created when the builder created the device template.
+
+2.	To start connecting a real connected air conditioner device, choose New, then Real.
+
+![Device Selection](images/deviceselection.png)
+
+3. Optionally, you can rename your new device by choosing the device name and editing the value.
+
+![Real Device](images/realdevice.png)
+
+### Configure a real device
+
+The real device is created from the Connected Air Conditioner device template. As a builder, you can use Settings to configure your device and set property values to record information about your device.
+
+1.	On the Settings page, notice that the Set Temperature setting status is “no update”. It stays in this state until the real device connects and acknowledges that it has acted on the setting.
+
+![Update Setting](images/updatesetting.png)
+
+2.	On the Properties page for your new, real connected air conditioner device, set Serial Number to rcac0010, and Firmware version to 9.75. Then choose **Save**.
+
+![Save Properties](images/saveproperties.png)
+
+As a builder, you can view the Measurements, Rules, and Dashboard pages for your real device.
+
+### Get connection string for real device from application
+
+A device developer needs to embed the connection string for your real device in the code that runs on the device. The connection string enables the device to connect securely to your Azure IoT Central application. Every device instance has a unique connection string. The following steps show you how to find the connection string for a device instance in your application:
+
+1.	On the Device screen for your real connected air conditioner device, choose Connect this device.
+
+![Connect Device](images/connectthedevice.png)
+
+2. On the Connect page, copy the Primary connection string, and save it. You use this value in the second half of this tutorial. A device developer uses this value in the client application that runs on the device.
+
+![Connection String](images/copyconnstring.png)
+
+### Prepare the client code
+
+The example code in this article is written in [Node.js](https://nodejs.org/) and shows just enough code to:
+
+* Connect as a device to your Azure IoT Central application.
+* Send temperature telemetry as a connected air conditioner device.
+* Respond to an operator who uses the Set Temperature setting.
+
+The "How to" articles referenced in the [Next Steps](https://docs.microsoft.com/en-us/azure/iot-central/tutorial-add-device#next-steps) section provide more complete samples and show the use of other programming languages. For more information about how devices connect to Azure IoT Central, see the [Device connectivity](https://docs.microsoft.com/en-us/azure/iot-central/concepts-connectivity) article.
+The following steps show how to prepare the Node.js sample:
+
+1.	Install [Node.js](https://nodejs.org/) version 4.0.x or later in your machine. Node.js is available for a wide variety of operating systems.
+2.	Create a folder called connectedairconditioner on your machine.
+3.	In your command-line environment, navigate to the connectedairconditioner folder you created.
+4.	To initialize your Node.js project, run the following commands accepting all the defaults:
+cmd/shCopy
+npm init
+5.	To install the necessary packages, run the following commands:
+cmd/shCopy
+npm install azure-iot-device azure-iot-device-mqtt --save
+6.	Using a text editor, create a file called ConnectedAirConditioner.js in the connectedairconditioner folder.
+7.	Add the following require statements at the start of the ConnectedAirConditioner.js file.
+JavaScriptCopy
+
+```nodejs
+'use strict';
+
+var clientFromConnectionString = require('azure-iot-device-mqtt').clientFromConnectionString;
+var Message = require('azure-iot-device').Message;
+var ConnectionString = require('azure-iot-device').ConnectionString;
+
+```
+
+8.	Add the following variable declarations to the file:
+JavaScriptCopy
+
+```
+var connectionString = '{your device connection string}';
+var targetTemperature = 0;
+var client = clientFromConnectionString(connectionString);
+```
+
+>Note: You update the placeholder {your device connection string} in a later step.
+
+9. Save the changes you have made so far but keep the file open.
+
+### Understand how client code maps to the application
+
+In the previous section, you created a skeleton Node.js project for an application that connects to your Azure IoT Central application. In this section, you add the code to:
+
+* Connect to your Azure IoT Central application.
+* Send telemetry to your Azure IoT Central application.
+* Receive settings from your Azure IoT Central application.
+
+1.	To send temperature telemetry to your Azure IoT Central application, add the following code to the ConnectedAirConditioner.js file:
+JavaScriptCopy
+
+```nodejs
+// Send device telemetry.
+function sendTelemetry() {
+  var temperature = targetTemperature + (Math.random() * 15);
+  var data = JSON.stringify({ temperature: temperature });
+  var message = new Message(data);
+  client.sendEvent(message, (err, res) => console.log(`Sent message: ${message.getData()}` +
+    (err ? `; error: ${err.toString()}` : '') +
+    (res ? `; status: ${res.constructor.name}` : '')));
+}
+```
+
+The name of the field in the JSON you send must match the name of the field you specified for temperature telemetry in your device template. In this example, the name of the field is temperature.
+
+2. To define the settings your device supports, such as setTemperature, add the following definition:
+JavaScriptCopy
+
+```nodejs
+// Add any settings your device supports
+// mapped to a function that is called when the setting is changed.
+var settings = {
+  'setTemperature': (newValue, callback) => {
+    // Simulate the temperature setting taking two steps.
+    setTimeout(() => {
+      targetTemperature = targetTemperature + (newValue - targetTemperature) / 2;
+      callback(targetTemperature, 'pending');
+      setTimeout(() => {
+        targetTemperature = newValue;
+        callback(targetTemperature, 'completed');
+      }, 5000);
+    }, 5000);
+  }
+};
+
+```
+
+3. To handle settings sent from Azure IoT Central, add the following function that locates and executes the appropriate device code:
+JavaScriptCopy
+
+```nodejs
+// Handle settings changes that come from Azure IoT Central via the device twin.
+function handleSettings(twin) {
+  twin.on('properties.desired', function (desiredChange) {
+    for (let setting in desiredChange) {
+      if (settings[setting]) {
+        console.log(`Received setting: ${setting}: ${desiredChange[setting].value}`);
+        settings[setting](desiredChange[setting].value, (newValue, status, message) => {
+          var patch = {
+            [setting]: {
+              value: newValue,
+              status: status,
+              desiredVersion: desiredChange.$version,
+              message: message
+            }
+          }
+          twin.properties.reported.update(patch, (err) => console.log(`Sent setting update for ${setting}; ` +
+            (err ? `error: ${err.toString()}` : `status: success`)));
+        });
+      }
+    }
+  });
+}
+```
+
+This function:
+
+* Watches for Azure IoT Central sending a desired property.
+* Locates the appropriate function to call to handle the setting change.
+* Sends an acknowledgement back to your Azure IoT Central application.
+
+4.	Add the following code to complete the connection to Azure IoT Central and hook up the functions in the client code:
+JavaScriptCopy
+
+```nodejs
+// Handle device connection to Azure IoT Central.
+var connectCallback = (err) => {
+  if (err) {
+    console.log(`Device could not connect to Azure IoT Central: ${err.toString()}`);
+  } else {
+    console.log('Device successfully connected to Azure IoT Central');
+     // Send telemetry measurements to Azure IoT Central every 1 second.
+    setInterval(sendTelemetry, 1000);
+     // Get device twin from Azure IoT Central.
+    client.getTwin((err, twin) => {
+      if (err) {
+        console.log(`Error getting device twin: ${err.toString()}`);
+      } else {
+        // Apply device settings and handle changes to device settings.
+        handleSettings(twin);
+      }
+    });
+  }
+};
+
+client.open(connectCallback);
+
+```
+
+5. Save the changes you have made so far but keep the file open.
+
+### Configure client code for the real device
+
+To configure your client code to connect to your Azure IoT Central application, you need to add the connection string for your real device that you noted earlier in this tutorial.
+
+1.	In the ConnectedAirConditioner.js file, find the following line of code:
+JavaScriptCopy
+
+```
+var connectionString = '{your device connection string}';
+```
+
+1.	Replace {your device connection string} with the connection string of your real device. You made a note of the connection string at the end of the "Get connection string for real device from application" section.
+2.	Save the changes to the ConnectedAirConditioner.js file.
+3.	To run the sample, enter the following command in your command-line environment:
+cmd/shCopy
+node ConnectedAirConditioner.js
+
+>Note: Make sure you are in the connectedairconditioner folder when you run this command.
+1.	The application prints output to the console:
+
+![Command Window](images/cmdline.png)
+
+2. After about 30 seconds, you see the telemetry on the device Measurements page.
+
+![Command Window](images/measurements.png)
+
+3.	On the Settings page, you can see the setting is now synchronized. When the device first connected, it received the setting value and acknowledged the change.
+
+![Command Window](images/settemp.png)
+
+4. On the Settings page, set the device temperature to 95 and choose Update device. Your sample application receives and processes this change.
+
+![Command Window](images/telemetry.png)
+
+>Note: There are two **setting update** messages. One when the pending status is sent and one when the completed status is sent.
+
+5.	On the Measurements page you can see that the device is sending higher temperature values.
+
+![Command Window](images/linechartpeak.png)
 
