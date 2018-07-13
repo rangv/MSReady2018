@@ -1,4 +1,4 @@
-#  Unlocking the IoT promise- Design and architect solutions with real-world impact 
+# DAI-DP 302 Unlocking the IoT promise- Design and architect solutions with real-world impact 
 
 ![IoT Hub](images/iothub.jpg)
 
