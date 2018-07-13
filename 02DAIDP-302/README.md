@@ -72,3 +72,82 @@ Now we are going to add users as **Operators** and **Builders**
 ![User Role](images/userrole.png)
 
 >Note: To add users in bulk, enter the User IDs of all the users you'd like to add separated by semi-colons. Choose a role from the Role drop-down and choose Save.
+
+4. After you add a user, an entry appears for that user on the Users page
+
+![User List](images/userlist.png)
+
+>Note: Edit the roles assigned to users. Roles cannot be changed once assigned. To change the role assigned to a user, delete the user and add the user again with a different role.
+
+## Builder
+
+In this section we will learn how to:
+
+* Create a new device template
+* Add telemetry to your device
+* View simulated telemetry
+* Define event measurement
+* View simulated events
+* Define state measurement
+* View simulated state
+* Use device properties
+* Use device settings
+
+## Create a new custom device template
+
+As a builder, you can create and edit the device templates in your application. When you create a device template, Azure IoT Central generates a simulated device from the template. The simulated device generates telemetry that enables you to test the behavior of your application before you connect a physical device.
+
+To add a new device template to your application, you need to go to the Application Builder page.
+
+![Application Builder](images/application_builder.png)
+
+The following steps show you how to create a new Connected Air Conditioner device template for devices that send temperature telemetry to your application.:
+
+1. On the Application Builder page, choose Create Device Template:
+
+![Create Device Template](images/createdevicetemplate.png)
+
+
+2. On the Application Builder page, choose Create Device Template:
+
+![Create Device Template](images/createdevicetemplate.png)
+
+On the Device Templates page, choose Custom. A Custom device template enables you to define all the characteristics and behaviors of your connected air conditioner
+
+![Custom Device Template](images/customdevicetemplate.png)
+
+On the New Device Template page, enter Connected Air Conditioner as the name of your device, and then choose Create. You can also upload an image of your device that's visible to operators in the device explorer
+
+![Custom Template](images/customtemplate.png)
+
+In the Connected Air Conditioner device template, make sure you are on the Measurements page where you define the telemetry. Each device template you define has separate pages for you to:
+
+* Specify the measurements, such as telemetry, event, and state, sent by the device.
+* Define the settings used to control the device.
+* Define the properties used to record information about the device.
+* Define the rules associated with the device.
+* Customize the device dashboard for your operators.
+
+![Measure](images/airconmeasure.png)
+
+>Note: To change the name of the device or device template, click on the text at the top of the page.
+
+To add the temperature telemetry measurement, choose New Measurement. Then choose Telemetry as the measurement type.
+
+![Measure](images/airconmeasure2.png)
+
+Each type of telemetry you define for a device template includes **configuration options** such as:
+
+* Display options.
+* Details of the telemetry.
+* Simulation parameters.
+
+To configure your Temperature telemetry, use the information in the following table:
+
+![Table](images/table.png)
+
+You can also choose a color for the telemetry display. To save the telemetry definition, choose **Save**.
+
+![Save](images/airconsave.png)
+
+After a short while, the Measurements page shows a chart of the temperature telemetry from your simulated connected air conditioner device. Use the controls to manage visibility, aggregation, or to edit the telemetry definition
