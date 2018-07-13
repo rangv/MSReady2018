@@ -5,5 +5,5 @@
 
 **Duration**: 45 minutes
 
-[DAI-DP 302](/DAIDP302/README.md)
+[DAI-DP 302](/01DAIDP302/README.md)
 
