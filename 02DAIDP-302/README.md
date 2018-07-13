@@ -177,6 +177,186 @@ To configure your Fan Motor Error event, use the information in the following ta
 
 To save the event definition, choose **Save**
 
-![Table](images/eventdefsave.png)
+![Save](images/eventdefsave.png)
 
+After a short while, the Measurements page shows a chart of the events randomly generated from your simulated connected air conditioner device. Use the controls to manage visibility, or to edit the event definition.
+
+![Measure](images/measureerror.png)
+
+To see additional details about the event, click the event on the chart.
+
+![Additional Details](images/measureerrorpopup.png)
+
+### Define State measurement
+
+You can use State to define and visualize the state of the device or its component over a period of time. Like telemetry measurements, Azure IoT Central can simulate device state to enable you to test the behavior of your application before you connect a physical device. You define state measurements for your device type in the Measurements view.
+
+To add Fan Mode measurement, choose New Measurement. Then choose State as the measurement type.
+
+![Measure State](images/measurestate.png)
+
+Each type of State you define for a device template includes configuration options such as:
+
+* Display Name.
+* Field Name.
+* Values with optional display labels.
+* Color for each value
+
+To configure your Fan Mode state, use the information in the following table:
+
+![Table](images/table3.png)
+
+To save the state measurement definition, choose **Save**.
+
+![Measure Definition](images/measuredefinition.png)
+
+After a short while, the Measurements page shows a chart of the states randomly generated from your simulated connected air conditioner device. Use the controls to manage visibility, or to edit the state definition.
+
+![State Definition](images/statedefinition.png)
+
+In case, there are too many data points sent by the device within a small duration, the state measurement is shown with a different visual as shown below. If you click on the chart, then all the data points within that time- period are displayed in a chronological order. You can also narrow down the time range so see the measurement plotted on the chart.
+
+![Additional Info](images/statedefinitionpopup.png)
+
+![Line Chart](images/linechart.png)
+
+### Properties, device properties, and settings
+
+Properties, device properties, and settings are different values defined in a device template and associated with each individual device:
+
+* You use settings to send configuration data to a device from your application. For example, an operator could use a setting to change the device's telemetry interval from two seconds to five seconds. When an operator changes a setting, the setting is marked as pending in the UI until the device acknowledges that it has actioned the setting change.
+* You use properties to record information about your device in your application. For example, you can use properties to record a device's serial number or the device manufacturer's phone number. Properties are stored in the application and do not synchronize with the device. An operator can assign values to properties.
+* You use device properties to enable a device to send property values to your application. These properties can only be changed by the device. For an operator, device properties are read-only.
+
+### Use settings
+
+You use settings to enable an operator to send configuration data to a device. In this section, you add a setting to your Connected Air Conditioner device template that enables an operator to set the target temperature of the connected air conditioner. 
+Navigate to the Settings page for your Connected Air Conditioner device template.:
+
+>Note: if the Design Mode is set to off, please set it to **On**.
+
+![Simulated Settings](images/simulatedsettings.png)
+
+1. You can create settings of different types such as numbers or text.
+2. Choose Number to add a number setting to your device.
+3. To configure your Set Temperature setting, use the information in the following table:
+
+![Table](images/table4.png)
+
+Then choose **Save**
+
+![Config Save](images/configsave.png)
+
+>Note: When the device acknowledges a setting change, the status of the setting changes to synced.
+
+You can customize the layout of the Settings page by moving and resizing settings tiles.
+
+![Set Condition](images/setcondition.png)
+
+### Use properties / device properties
+
+You use properties to store information about your device in the application. In this section, you add device properties to your Connected Air Conditioner device template to store the device serial number and firmware version. Note that both of these are read-only properties reported by the device -- you cannot assign values to them. Properties you might use that you can assign values to include the location of the device, ownership information, and the last service date/time for the device.
+
+Navigate to the Properties page for your Connected Air Conditioner device template.
+
+![Set Condition](images/simulatedproperties.png)
+
+1. You can create device properties of different types such as numbers or text. To add a serial number property to your device template, choose Text.
+
+2. To configure your serial number property, use the information in the following table
+
+![Table](images/table5.png)
+
+Leave other fields with their default values.
+
+![Save](images/simulatedsave.png)
+
+1. Choose **Save**.
+2. To add a firmware version to the device properties for your device template, choose Text.
+3. To configure your firmware version device property, use the information in the following table:
+
+![Table](images/table6.png)
+
+![Save](images/simulatedsave2.png)
+
+Choose **Save**.
+
+You can customize the layout of the Properties page by moving and resizing property tiles.
+
+![Firmware](images/simulatedsave3.png)
+
+### Use commands 
+
+You use commands to enable an operator to run commands directly on the device. In this section, you add a command to your Connected Air Conditioner device template that enables an operator to echo a certain message on the the connected air conditioner display (this works with MxChip sample code).
+
+1. Navigate to the Commands page for your Connected Air Conditioner device template.:
+
+![Configure Command](images/configurecommand.png)
+
+You can create commands of different types based on your requirements.
+
+2. Click New Command to add a command to your device.
+3. To configure your new command, use the information in the following table
+
+![Table](images/table7.png)
+
+You can add additional inputs to the command by clicking + for inputs.
+
+Choose **Save**.
+
+You can customize the layout of the Commands page by moving and resizing commands tile
+
+![New Command](images/newcommand.png)
+
+### View your simulated device
+
+Now you have defined your Connected Air Conditioner device template, you can customize its Dashboard to include the measurements, settings, and properties you defined. Then you can preview the dashboard as an operator.:
+Choose the Dashboard page for your Connected Air Conditioner device template.
+
+![Dashboard](images/dashboard.png)
+
+Choose Line Chart to add the component onto the Dashboard.
+
+![Line Chart](images/linechart2.png)
+
+Configure the Line Chart component using the information in the following table
+
+![Configure Line Chart Table](images/configurelinecharttable.png)
+
+![Configure Line Chart Table Save](images/configurelinecharttablesave.png)
+
+Then choose **Save**.
+
+Configure the Event Chart component using the information in the following table
+
+![Configure Line Chart Table Save](images/save.png)
+
+Then choose **Save**.
+
+Configure the State Chart component using the information in the following table.
+
+![Configure Line Chart Table Save](images/statechart.png)
+
+Then choose **Save**.
+
+To add the set temperature setting to the dashboard, choose Settings and Properties
+
+![Settings and Properties](images/settingsandproperties.png)
+
+Configure the Settings and Properties component. : Choose:
+1.	Set Temperature
+2.	Firmware Version
+3.	Serial Number
+
+![Settings and Properties](images/settingsandproperties2.png)
+
+Then choose **Save**.
+
+To view the dashboard as an operator, switch off Design Mode on the top right of the page
+
+### Configure rules
+
+To start adding a rule in the Rules view, choose Rules
+
+![Chose Rules](images/choserules.png)
 
