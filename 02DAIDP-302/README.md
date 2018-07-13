@@ -150,4 +150,33 @@ You can also choose a color for the telemetry display. To save the telemetry def
 
 ![Save](images/airconsave.png)
 
-After a short while, the Measurements page shows a chart of the temperature telemetry from your simulated connected air conditioner device. Use the controls to manage visibility, aggregation, or to edit the telemetry definition
+After a short while, the Measurements page shows a chart of the temperature telemetry from your simulated connected air conditioner device. Use the controls to manage visibility, aggregation, or to edit the telemetry definition.
+
+![Aggregate](images/airconaverage.png)
+
+You can also customize the chart using the Line, Stacked, and Edit Time Range controls.
+
+![Stacked](images/stackedtimerange.png)
+
+### Define Event measurement
+
+You can use Event to define point-in-time data that is sent by the device to signify something of significance like an error or a component failure. Like telemetry measurements, Azure IoT Central can simulate device events to enable you to test the behavior of your application before you connect a physical device. You define event measurements for your device type in the Measurements view.
+To add the Fan Motor Error event measurement, choose New Measurement. Then choose Event as the measurement type.
+
+![Event Measure](images/eventmeasure.png)
+
+Each type of Event you define for a device template includes **configuration options** such as:
+
+* Display Name.
+* Field Name.
+* Severity.
+
+To configure your Fan Motor Error event, use the information in the following table:
+
+![Table](images/table2.png)
+
+To save the event definition, choose **Save**
+
+![Table](images/eventdefsave.png)
+
+
