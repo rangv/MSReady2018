@@ -45,4 +45,30 @@ https://docs.microsoft.com/en-us/azure/iot-central/howto-create-application
 
 Navigate to the Administration section by choosing Administration on the left navigation menu.
 
-![Plan](images/administer.png)
+![Administer](images/administer.png)
+
+The Administration section enables you to:
+
+* Manage users
+* Manage roles
+* View billing information
+* Manage application settings
+* Extend a free trial
+
+![Administration](images/administration.png)
+
+Now we are going to add users as **Operators** and **Builders**
+
+1. To add a user account to an Azure IoT Central application, use the secondary navigation menu to navigate to the Users page in the Administration section
+
+![User Administration](images/administration_user.png)
+
+2. On the Users page, choose “Add User” to add a user.
+
+![User Administration](images/adduser.png)
+
+3. When you add a user to your Azure IoT Central application, choose a role for the user from the Role drop-down. Learn more about roles in the Roles in Azure IoT Central section of this article
+
+![User Role](images/userrole.png)
+
+>Note: To add users in bulk, enter the User IDs of all the users you'd like to add separated by semi-colons. Choose a role from the Role drop-down and choose Save.
