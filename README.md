@@ -16,4 +16,4 @@
 
 **Duration**: 45 minutes
 
-[DAI-DP 304 - Azure Solution Accelerators - Remote Monitoring](/03DAIDP-304/README.md)
+[DAI-DP 304 - Azure Solution Accelerators - Remote Monitoring](/03DAIDP304/README.md)
