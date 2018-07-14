@@ -1,34 +1,19 @@
-# DAI-DP 302 Unlocking the IoT promise- Design and architect solutions with real-world impact
+# DAI-DP 304 Azure IoT solution accelerators
 
-![IoT Hub](images/iothub.jpg)
+Use templates to create fully customizable solutions for common Internet of Things (IoT) scenarios—Bring your business together in insightful new ways—from increasing process efficiencies to delivering better customer experiences and generating new revenue streams. 
 
-Azure IoT Hub is a fully managed service that enables reliable and secure bidirectional communications between millions of IoT devices and a solution back end. Azure IoT Hub:
-
-* Provides multiple device-to-cloud and
-* cloud-to-device communication options. These options include one-way messaging, file transfer, and request-reply methods.
-* Provides built-in declarative message routing to other Azure services.
-* Provides a queryable store for device metadata and synchronized state information.
-* Enables secure communications and access control using per-device security keys or X.509 certificates.
-* Provides extensive monitoring for device connectivity and device identity management events.
-* Includes device libraries for the most popular languages and platforms.
-
-## IoTHub: Connect, monitor, and manage billions of IoT assets
-
-* **Establish** bi-directional communication with billions of IoT devices
-* **Authenticate** per device for security-enhanced IoT solutions
-* **Register** devices at scale with IoT Hub Device Provisioning Service
-* **Manage** your IoT devices at scale with device management
-* **Extend** the power of the cloud to your edge device
+Get started quickly building your IoT solutions with the IoT solution accelerators. Add new devices and connect existing ones using device SDKs for multiple platforms, including Linux, Windows, and real-time operating systems. Easily scale from just a few sensors to millions of simultaneously connected devices and rely on the global availability of Azure, no matter how large or small your project.
 
 <iframe src="https://channel9.msdn.com/events/Build/2018/BRK3804/player" width="480" height="270" allowFullScreen frameBorder="0"></iframe>
 
 ### In this lab you will
 
-* Learn to Create IoT Solution Accelerator
-
-* Learn to use Simulator to connect to Accelerator and send Data
-
+* How to deploy the Azure IoT Remote Monitoring solution accelerator
+* Use the solution Dashboard page to visualize simulated and real devices on a map, and the 
+* Wear an operator hat and perform tasks from Web UI
+* Learn to use an external Simulator to connect to Accelerator and send Data
 * Learn to setup MXChip, connect to Solution Accelerator and send data
+* Learn to extend the solution to Time Series Insights and Data Lake Store
 
 ![Resource Group](images/Lab.png)
 
