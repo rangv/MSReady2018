@@ -15,7 +15,7 @@ Get started quickly building your IoT solutions with the IoT solution accelerato
 * Learn to setup MXChip, connect to Solution Accelerator and send data
 * Learn to extend the solution to Time Series Insights and Data Lake Store
 
-![Resource Group](images/Lab.png)
+![Lab](images/lab.png)
 
 ## Create Remote Monitoring Solution
 
