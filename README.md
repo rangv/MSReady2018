@@ -10,4 +10,10 @@
 
 **Duration**: 45 minutes
 
-[DAI-DP 302 - Experience the simplicity of SaaS for IoT (Internet of Things) with IoT Central](/02DAIDP-302/README.md)
+[DAI-DP 320 - Experience the simplicity of SaaS for IoT (Internet of Things) with IoT Central](/02DAIDP-302/README.md)
+
+## DAI-DP 304 Azure Solution Accelerators - Remote Monitoring
+
+**Duration**: 45 minutes
+
+[DAI-DP 304 - Azure Solution Accelerators - Remote Monitoring](/03DAIDP-304/README.md)
