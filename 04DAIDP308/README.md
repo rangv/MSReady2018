@@ -86,14 +86,9 @@ Verify if temperature sensor module is deployed on the device
 
 ![IoTEdge List](images/iotedgelisttempsensor.png)
 
+Verify if data is being generated and sentemp sensor module is deployed
 
-Verify if data is being generated and sent
-
-```code
-$ sudo su -
-$ docker ps
-## verify temp sensor module is deployed
-
+```
 $ docker logs -f tempsensor
 ```
 
@@ -102,3 +97,21 @@ $ docker logs -f tempsensor
 Verify data is being sent upstream to Iot Hub
 
 ![IoTEdge List](images/iothubdata.png)
+
+### Create Azure Kubernetes Service
+
+Click on Create a resource
+
+![Create Resource](images/create_resource.png)
+
+Click on **Containers** and **Kubernetes Service**
+
+![AKS](images/aks.png)
+
+Create Kubernetes service in the existing resource group with 3 VMs. Click **Review+Create**
+
+![AKS](images/createaks.png)
+
+Review the deployment and click **Create**
+
+![AKS](images/aksreviewcreate.png)
