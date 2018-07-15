@@ -17,3 +17,9 @@
 **Duration**: 45 minutes
 
 [DAI-DP 304 - Azure Solution Accelerators - Remote Monitoring](/03DAIDP304/README.md)
+
+## DAI-DP 308 Azure IoT Edge
+
+**Duration**: 45 minutes
+
+[DAI-DP 308 - Azure IoT Edge](/04DAIDP308/README.md)
