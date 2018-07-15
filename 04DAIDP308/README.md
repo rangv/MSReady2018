@@ -70,6 +70,35 @@ iotedge list
 
 Check that your device is paired with Iot Hub
 
-![IoTEdge List](images/iothubedge.png)
+![IoT Hub Edge](images/iothubedge.png)
 
-![IoTEdge List](images/deviceconnected.png)
+![Device Connected](images/deviceconnected.png)
+
+### Deploy a custom module
+
+Deploy temperator sensor simulation custom module from Docker Hub. Fom Azure Portal go to IoT Hub and select the device you setup. Click on **Set Modules**. Add IoT Edge Module.
+
+![Temp Sensor](images/tempsensor.png)
+
+Click **Next** twice and **Submit**
+
+Verify if temperature sensor module is deployed on the device
+
+![IoTEdge List](images/iotedgelisttempsensor.png)
+
+
+Verify if data is being generated and sent
+
+```code
+$ sudo su -
+$ docker ps
+## verify temp sensor module is deployed
+
+$ docker logs -f tempsensor
+```
+
+![IoTEdge List](images/dockerlogs.png)
+
+Verify data is being sent upstream to Iot Hub
+
+![IoTEdge List](images/iothubdata.png)
