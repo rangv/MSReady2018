@@ -36,6 +36,14 @@ SSH into VM
 
 ![SSH into VM](images/sshintovm.png)
 
+After login is complete in the cloud shell if you have multiple subscriptions make sure your subscription is set to the one where your VM is deployed. Otherwise use the following command and set the subscription where the VM is deployed.
+
+```code
+az login
+az account set -s "subscription id"
+## To set the correct one
+```
+
 Go to /home/"user"/IotEdge
 
 ![Script](images/iotedge.png)
@@ -48,15 +56,7 @@ $ bash edge_configure.sh
 
 ![Device Login](images/devicelogin.png)
 
-You will bbe prompted to open a browser and device login. Enter the code provided in the browser and when prompted to login enter your user and password.
-
-After login is complete in the cloud shell if you have multiple subscriptions make sure your subscription is set to the one where your VM is deployed. Otherwise use the following command and set the subscription where the VM is deployed.
-
-```code
-az login
-az account set -s "subscription id"
-## To set the correct one
-```
+You will be prompted to open a browser and device login. Enter the code provided in the browser and when prompted to login enter your user and password.
 
 Make sure VM is configured to be edge device
 
@@ -115,3 +115,20 @@ Create Kubernetes service in the existing resource group with 3 VMs. Click **Rev
 Review the deployment and click **Create**
 
 ![AKS](images/aksreviewcreate.png)
+
+Kubernetes cluster is created in a few minutes
+
+![AKS](images/askready.png)
+
+Run the following command in **cloud shell** to get credentials
+
+```code
+az acs kubernetes get-credentials --resource-group=<cluster-resource-group> --name=<cluster-name>
+```
+
+Test Kubectl
+
+Run
+```code
+$ kubectl get pods
+```
