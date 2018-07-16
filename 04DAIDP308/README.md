@@ -21,7 +21,7 @@ Fill out the custom deployment form per guidance in the figure below and click *
 The custom deployment will complete the following operations for you:
 
 1. Stand up an Data Science VM and IoT Hub.
-2. Install the [IoT Edge runtime].(https://docs.microsoft.com/en-my/azure/iot-edge/how-to-install-iot-edge-linux) and [*az* CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) in the VM.
+2. Install the [IoT Edge runtime](https://docs.microsoft.com/en-my/azure/iot-edge/how-to-install-iot-edge-linux) and [*az* CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) in the VM.
 3. Open ports to allow SSH access to the Data science VM.
 
 Once the deployment is completed, pin it to your dashboard and you will see a VM and IoT Hub resources in the tile.
