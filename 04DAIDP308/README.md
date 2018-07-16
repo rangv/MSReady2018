@@ -6,77 +6,92 @@ Azure IoT Edge moves cloud analytics and custom business logic to devices so tha
 
 <iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Kubernetes-integration-with-Azure-IoT-Edge/player" width="480" height="270" allowFullScreen frameBorder="0"></iframe>
 
-## Standup Edge enabled VM on Azure
+## Milestone 1: Standup Edge enabled VM on Azure
 
 For this workshop you will standup Data Science Ubuntu VM and this VM will be the IoT Edge Device.
 
-Go to [Github Project](
+Go to [Github Project and click **Deploy To Azure**](
 https://github.com/Azure/DataScienceVM/tree/master/Extensions/Iot
-) and click **Deploy To Azure**. This will install a Data Science VM which is IoT Edge enabled.
+). This will install a Data Science VM which is IoT Edge enabled.
 
-![VM Deployment](images/vmdeployment.png)
+Fill out the custom deployment form per guidance in the figure below and click **Purchase**. 
 
-Fill out the above form and click **Purchase**. For this workshop create a new IoT Hub for each VM you create.
+![VM Deployment](images/custom-deployment-captions.png)
 
-Once the deployment is completed go to the resource group created and you will see a VM and IoT Hub have been created.
+The custom deployment will complete the following operations for you:
 
-Click on the VM deployed and copy the public IP of the VM
+1. Stand up an Data Science VM and IoT Hub.
+2. Install the [IoT Edge runtime].(https://docs.microsoft.com/en-my/azure/iot-edge/how-to-install-iot-edge-linux) and [*az* CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest) in the VM.
+3. Open ports to allow SSH access to the Data science VM.
 
-![publicip](images/ssh.png)
+Once the deployment is completed, pin it to your dashboard and you will see a VM and IoT Hub resources in the tile.
 
-SSH into the VM using Cloud Shell
+![Pin](images/pin-to-dash.png)
+
+From the dashboard tile, click the "Public IP address" resource.
+
+![public-ip](images/public-ip.png)
+
+Copy the IP address from the page.
+
+![copy-public-ip](images/copy-public-ip.png)
+
+Open Cloud Shell from your Azure portal. You will SSH into the VM from here.
 
 ![Cloud Shell](images/cloudshell.png)
 
-You will SSH into the VM from here
-
 ![SSH Prompt](images/sshprompt.png)
 
-SSH into VM
+SSH into VM using copied IP address along with Username and Password you provided in the custom deployment form.
+
+```bash
+ssh <username>@<public-ip>
+```
 
 ![SSH into VM](images/sshintovm.png)
 
-After login is complete in the cloud shell if you have multiple subscriptions make sure your subscription is set to the one where your VM is deployed. Otherwise use the following command and set the subscription where the VM is deployed.
+*If you use only one Azure subsciption, you can ignore this step.* Otherwise, ensure your subscription is set to the one where the VM and IoT Hub were deployed.
 
-```code
-az login
-az account set -s "subscription id"
-## To set the correct one
-```
+ ```bash
+ az login --use-device-code
+ az account set -s "replace-with-subscription-name-used-for-vm-and-iothub"
+ ```
+ >The commands above, if needed, should be run in SSH session of the VM, **not** in the default cloud shell environment.
 
-Go to /home/"user"/IotEdge
+In the SSH session, cd to **IotEdge** directory and execute **edge_configure.bat**
 
-![Script](images/iotedge.png)
-
-Run
-
-```code
-$ bash edge_configure.sh
+```bash
+cd /home/${USER}/IotEdge
+bash edge_configure.sh
 ```
 
 ![Device Login](images/devicelogin.png)
 
-You will be prompted to open a browser and device login. Enter the code provided in the browser and when prompted to login enter your user and password.
+Click on the device login link and enter the displayed code in the web page.
 
-Make sure VM is configured to be edge device
+ **edge_configure.sh** performs the following steps:
 
-Run
+1. Creates an Edge device named "*vmhostname*_edge" in the IoT Hub using *az* CLI.
+2. Associates the VM with the Edge device identity.
 
-```code
-iotedge list
+Run the command below and confirm the **edgeAgent** module is running.
+
+```bash
+sudo iotedge list
 ```
 
 ![IoTEdge List](images/iotedgelist.png)
 
-Check that your device is paired with Iot Hub
+Congratulations, you have completed Milestone 1! On to the next...
 
-![IoT Hub Edge](images/iothubedge.png)
+## Milestone 2: Deploy a custom module
 
-![Device Connected](images/deviceconnected.png)
+In this milestone, we'll deploy a simulated temperature sensor module on the Edge device. From your pinned resource group tile, go to the IoT Hub resource and click on the **IoT Edge** blade.
 
-### Deploy a custom module
+![iothubedge](images/iothubedge.png)
 
-Deploy temperator sensor simulation custom module from Docker Hub. Fom Azure Portal go to IoT Hub and select the device you setup. Click on **Set Modules**. Add IoT Edge Module.
+
+
 
 ![Temp Sensor](images/tempsensor.png)
 
