@@ -5,7 +5,7 @@ Azure IoT Edge is an Internet of Things (IoT) service that builds on top of IoT 
 Azure IoT Edge moves cloud analytics and custom business logic to devices so that your organization can focus on business insights instead of data management. Enable your solution to truly scale by configuring your IoT software, deploying it to devices via standard containers, and monitoring it all from the cloud.
 
 ## Pre-work
->One of the steps in Milestone 3 has a deployment step that can take several minutes. It is recommended that kick it off in seperate browser tab before starting with Milestone 1. Let the operation finish in background so it ready to go when reach Milestone 3. Here are the steps:
+>One of the steps in Milestone 3 has a deployment step that can take several minutes. It is recommended that kick it off in seperate browser tab before starting with Milestone 1. Let the operation finish in background so it's ready to go when reach Milestone 3. Here are the steps:
 
 ### Standup an AKS cluster
 
@@ -25,11 +25,11 @@ az aks create --resource-group ${USER}Ready18AKSCluster --name ${USER}AKSCluster
 
 ## **Milestone 1: Standup Edge enabled VM on Azure**
 
-For this workshop you will standup Data Science Ubuntu VM and this VM will be the IoT Edge Device.
+For this workshop you will standup a Data Science Ubuntu VM and this VM will be the IoT Edge Device.
 
 Go to [Github Project and click **Deploy To Azure**](
 https://github.com/Azure/DataScienceVM/tree/master/Extensions/Iot
-). This will install a Data Science VM which is IoT Edge enabled.
+).
 
 Fill out the custom deployment form per guidance in the figure below and click **Purchase**. 
 
@@ -294,7 +294,7 @@ The power of Kubernetes becomes clear when doing at-scale deployments. Consider 
       # Cluster role reference
       roleRef: cluster-admin
     ```
-4. Use Helm to install another IoT Edge connector virtual node that is backed by the 2nd IoT Hub by pointing it to file created in the previous step.
+4. Use Helm to install another IoT Edge connector virtual node that is backed by the 2nd IoT Hub by pointing it to the file created in the previous step.
 
     ```
     helm install -n hub1 --set rbac.install=true charts/iot-edge-connector/ -f ./values.yaml
@@ -317,7 +317,7 @@ Any updates to the deployment from Kubernetes will now reflect in both IoT hubs,
 
 If you've made it till here, you're awesome! Check out the additional resources for more information.
 
-##Additional resources:
+## Additional resources:
 * [Azure IoT Edge documentation](https://docs.microsoft.com/en-us/azure/iot-edge/about-iot-edge)
 * [IoT Edge Github repo](https://github.com/azure/iotedge)
 * [IoT Edge integration with Kubernetes](https://azure.microsoft.com/en-us/blog/manage-azure-iot-edge-deployments-with-kubernetes/)
@@ -326,6 +326,8 @@ If you've made it till here, you're awesome! Check out the additional resources 
     <iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Kubernetes-integration-with-Azure-IoT-Edge/player" width="480" height="270" allowFullScreen frameBorder="0"></iframe>
 
 * [IoT Edge custom vision sample](https://azure.microsoft.com/en-us/resources/samples/custom-vision-service-iot-edge-raspberry-pi/)
+
+* [Cognitive services customvision.ai](https://customvision.ai/)
 
 
 
