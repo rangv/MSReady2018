@@ -120,40 +120,159 @@ Verify data is being sent upstream to IoT Hub
 
 Milestone 2 complete! 
 
-### Milestone 3: Deploy IoT Edge AI module using Kubernetes
+## Milestone 3: Deploy IoT Edge AI module using Kubernetes
 
+### Standup an AKS cluster
+>If you have completed these steps as part of the pre-work, you can move on to the next step.
 
+1. Open [https://shell.azure.com](shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
 
+```
+# Create resource group
+az group create --name ${USER}Ready18AKSCluster --location eastus
 
-Click on Create a resource
+# Create AKS cluster (this operation can take several minutes)
+az aks create --resource-group ${USER}Ready18AKSCluster --name ${USER}AKSCluster --node-count 1 --generate-ssh-keys
+```
+*If you run into errors with duplicate resource group or cluster name replace **${USER}** in the commands below with your Microsoft alias.* 
 
-![Create Resource](images/create_resource.png)
+### Verify cluster creation
 
-Click on **Containers** and **Kubernetes Service**
+First, let's connect to the cluster
 
-![AKS](images/aks.png)
-
-Create Kubernetes service in the existing resource group with 3 VMs. Click **Review+Create**
-
-![AKS](images/createaks.png)
-
-Review the deployment and click **Create**
-
-![AKS](images/aksreviewcreate.png)
-
-Kubernetes cluster is created in a few minutes
-
-![AKS](images/askready.png)
-
-Run the following command in **cloud shell** to get credentials
-
-```code
-az acs kubernetes get-credentials --resource-group=<cluster-resource-group> --name=<cluster-name>
+```
+az aks get-credentials --resource-group ${USER}Ready18AKSCluster --name ${USER}AKSCluster 
 ```
 
-Test Kubectl
+We'll use the **kubectl** command line tool to interact with the AKS cluster. Check the nodes in the cluster using:
 
-Run
-```code
-$ kubectl get pods
 ```
+kubectl get nodes
+```
+
+Output should like this (the nodes names in your cluster will be different):
+
+![getnodes](images/getnodes.png)
+
+
+### Install the IoT Edge Kuberentes connector
+
+1. Clone the IoT Edge connector repo.
+    ```
+    git clone https://github.com/Azure/iot-edge-virtual-kubelet-provider.git
+    ```
+
+2. Initialize Helm, a Kubernetes package manager.
+    ```
+    helm init
+    ```
+
+3. Get the IoT Hub Owner Connection String for the IoT Hub you created in the previous milestones.
+
+    ![iothubowner](images/iothubowner.png)
+
+4. Save the Owner connection string in key called **hub0-cs** in a Kubernetes secret store called **my-secrets**.
+
+    ```
+    kubectl create secret generic my-secrets --from-literal=hub0-cs='replace-with-copied-owner-connection-string'
+    ```
+
+5. Give cluster-admin privileges to default account.
+
+   ```
+   kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
+   ```
+
+5. Install the IoT Edge connector using helm.
+
+    ```
+    cd iot-edge-virtual-kubelet-provider/src/
+    helm install -n hub0 --set rbac.install=true charts/iot-edge-connector/
+    ```
+
+    In a minute, `kubectl get nodes` will show the IoT Edge connector as a virtual node.
+
+    ![virtualnode](images/virtualnode.png)
+
+
+### Create a Kubernetes deployment for IoT Edge Connector
+The IoT Edge Kubernetes connector allows expressing IoT Edge module deployment as a first-class Kubernetes deployment. It does so by consuming Kubernetes deployments and translating them to IoT Hub deployments for its backing IoT Hub.
+
+1. Add a tag to the Edge device to make it targetable by the deployment.
+
+    From Edge device details, click the **Device Twin** button from the top bar and add the following json.
+
+    ```
+    "tags": {
+        "location": "b43"
+    },
+    ```
+    ![devicetwin](images/devicetwin.gif)
+
+2. Create the Kubernetes deployment that targets this device.
+
+    ```
+    curl -fsSL aka.ms/k8s-fruity-ai-edge | kubectl apply -f -
+    ```
+
+
+
+    Here is the full content of the deployment:
+    <script src="https://gist.github.com/veyalla/2de3e39f4bd811af8f07b2ed81d9032d.js"></script>
+
+
+
+3. In the Azure portal you should see the **fruity-ai** deployment show in the **IoT Edge Deployments** list. And, shortly the deployment will be applied to the Edge device since it is tagged with value that the deployment is targetting.
+
+    ![deploy](images/deploymenthub.png)
+
+
+4. The change in configuration will also be reflected on the VM you created in Milestone 1.
+
+    ![ailist](images/ailist.png)
+
+5. You can view the results of the realtime object recognition using:
+
+    ```
+    watch -n 0.2 sudo iotedge logs --tail 1 cameracapture
+    ```
+
+Milestone 3 complete!
+
+## Milestone 4: At scale deployments with Kubernetes.
+The power of Kubernetes becomes clear when doing at-scale deployments. Consider a common scenario - you have multiple IoT Hub all over the world and want the same *fruity-ai* configuration on all of them. With Kubernetes this is literally a one command operation! Let's see how.
+
+1. Create a new IoT Hub and VM Edge device following steps in Milestone 1.
+
+2. Create a new secrets store **my-secrets1** and store the Owner connection string for the new hub in **hub1-cs**.
+    ```
+    kubectl create secret generic my-secrets1 --from-literal=hub1-cs='replace-with-2nd-hub-owner-connection-string'
+    ```
+
+3. Create a file called **values.yaml** with the following content.
+
+    ```
+    edgeproviderimage:
+      repository: microsoft/iot-edge-vk-provider
+      tag: latest
+      pullPolicy: Always
+      port: 5000
+      secretsStoreName: my-secrets1
+      secretKey: hub1-cs
+    vkimage:
+      repository: microsoft/virtual-kubelet
+      tag: 0.3
+      pullPolicy: Always
+    env:
+      nodeName: iot-edge-connector-hub0
+      nodeTaint:
+    # Install Default RBAC roles and bindings
+    rbac:
+      install: false
+      serviceAccountName: virtual-kubelet
+      # RBAC api version (currently v1)
+      apiVersion: v1
+      # Cluster role reference
+      roleRef: cluster-admin
+    ```
+4. Use Helm to install another IoT Edge connector virtual node that is backed by the 2nd IoT Hub.
