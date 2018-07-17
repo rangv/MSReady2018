@@ -5,7 +5,7 @@ Azure IoT Edge is an Internet of Things (IoT) service that builds on top of IoT 
 Azure IoT Edge moves cloud analytics and custom business logic to devices so that your organization can focus on business insights instead of data management. Enable your solution to truly scale by configuring your IoT software, deploying it to devices via standard containers, and monitoring it all from the cloud.
 
 ## Pre-work
->One of the steps in Milestone 3 has deployment step that can take several minutes. It is recommended that kick it off in seperate browser tab and proceed with Milestone 1 while the operation finishes in background. Here are the steps:
+>One of the steps in Milestone 3 has a deployment step that can take several minutes. It is recommended that kick it off in seperate browser tab before starting with Milestone 1. Let the operation finish in background so it ready to go when reach Milestone 3. Here are the steps:
 
 ### Standup an AKS cluster
 
