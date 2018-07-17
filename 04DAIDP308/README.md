@@ -67,14 +67,6 @@ ssh <username>@<public-ip>
 
 ![SSH into VM](images/sshintovm.png)
 
-*If you use only one Azure subsciption, you can skip this step.* Otherwise, ensure your subscription is set to the one where the VM and IoT Hub were deployed.
-
- ```bash
- az login --use-device-code
- az account set -s "replace-with-subscription-name-used-for-vm-and-iothub"
- ```
- >The commands above, if needed, should be run in SSH session of the VM, **not** in the default cloud shell environment.
-
 In the SSH session, cd to **IotEdge** directory and execute **edge_configure.bat**
 
 ```bash
@@ -105,7 +97,7 @@ Congratulations, you have completed Milestone 1! On to the next...
 
 In this milestone, we'll deploy a simulated temperature sensor module on the Edge device. 
 
-1. From your pinned resource group tile, go to the IoT Hub resource and click on the **IoT Edge** blade.
+1. From your pinned resource group tile, go to the **IoT Hub resource** and click on the **IoT Edge** blade.
 1. Click on the Edge Device ID to go to the Device details page, then click **Set Modules**.
 1. From the **Deployment Modules**, click the **+Add** button, and select **IoT Edge Module**.
 1. In the **IoT Edge Custom Modules** screen, enter **tempSensor** in the **Name** field and **mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0** in the **Image URI** field, then click **Save**.
@@ -115,7 +107,7 @@ In this milestone, we'll deploy a simulated temperature sensor module on the Edg
 
 
 
-Verify if temperature sensor module is deployed on the device by executing the following command in the SSH session:
+In about a minute, verify if temperature sensor module is deployed on the device by executing the following command in the SSH session:
 
 ```bash
 sudo iotedge list
@@ -131,7 +123,7 @@ sudo iotedge logs tempSensor -f
 
 ![IoTEdge List](images/dockerlogs.png)
 
-Verify data is being sent upstream to IoT Hub
+Verify data is being sent upstream to IoT Hub by checking the **IoT Hub Usage** tile in the hub's **Overview** blade.
 
 ![IoTEdge List](images/iothubdata.png)
 
@@ -241,10 +233,18 @@ The IoT Edge Kubernetes connector allows expressing IoT Edge module deployment a
 
 3. In the Azure portal you should see the **fruity-ai** deployment show in the **IoT Edge Deployments** list. And, shortly the deployment will be applied to the Edge device since it is tagged with value that the deployment is targetting.
 
+    If you don't see the deployment, hit the **Refresh** button every 30 secs or so to update the list.
+
     ![deploy](images/deploymenthub.png)
 
 
-4. The change in configuration will also be reflected on the VM you created in Milestone 1.
+4. The change in configuration will also be reflected on the VM you created in Milestone 1. List the modules in the SSH session.
+
+    ```bash
+    sudo iotedge list
+    ```
+
+    >If the Bash cloud shell times out or becomes unreponsive, click the *power* button on the top bar of the cloud shell window to reconnect. Progress is saved, but you will need to SSH in to the Edge VM again.
 
     ![ailist](images/ailist.png)
 
@@ -253,6 +253,8 @@ The IoT Edge Kubernetes connector allows expressing IoT Edge module deployment a
     ```
     watch -n 0.2 sudo iotedge logs --tail 1 cameracapture
     ```
+
+    CTRL+c will exit.
 
 Milestone 3 complete!
 
@@ -264,6 +266,9 @@ The power of Kubernetes becomes clear when doing at-scale deployments. Consider 
 2. Add the same tag to edge device as in Milestone 3.
 
 2. Create a new secrets store **my-secrets1** and save the Owner connection string for the new hub in **hub1-cs**.
+
+    >Enter the below commands in the cloud shell window, **not** in the VM's SSH session.
+
     ```
     kubectl create secret generic my-secrets1 --from-literal=hub1-cs='replace-with-2nd-hub-owner-connection-string'
     ```
@@ -278,7 +283,7 @@ The power of Kubernetes becomes clear when doing at-scale deployments. Consider 
       port: 5000
       secretsStoreName: my-secrets1
       secretKey: hub1-cs
-    vkimage:
+    vkimage
       repository: microsoft/virtual-kubelet
       tag: 0.3
       pullPolicy: Always
@@ -297,7 +302,7 @@ The power of Kubernetes becomes clear when doing at-scale deployments. Consider 
 4. Use Helm to install another IoT Edge connector virtual node that is backed by the 2nd IoT Hub by pointing it to the file created in the previous step.
 
     ```
-    helm install -n hub1 --set rbac.install=true charts/iot-edge-connector/ -f ./values.yaml
+    helm install -n hub1 --set rbac.install=true /home/${USER}/iot-edge-virtual-kubelet-provider/src/charts/iot-edge-connector/ -f ./values.yaml
     ```
 
     In a few seconds, `kubectl get nodes` will show the new virtual node.
