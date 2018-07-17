@@ -4,9 +4,26 @@ Azure IoT Edge is an Internet of Things (IoT) service that builds on top of IoT 
 
 Azure IoT Edge moves cloud analytics and custom business logic to devices so that your organization can focus on business insights instead of data management. Enable your solution to truly scale by configuring your IoT software, deploying it to devices via standard containers, and monitoring it all from the cloud.
 
-<iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Kubernetes-integration-with-Azure-IoT-Edge/player" width="480" height="270" allowFullScreen frameBorder="0"></iframe>
+## Pre-work
+>One of the steps in Milestone 3 has deployment step that can take several minutes. It is recommended that kick it off in seperate browser tab and proceed with Milestone 1 while the operation finishes in background. Here are the steps:
 
-## Milestone 1: Standup Edge enabled VM on Azure
+### Standup an AKS cluster
+
+1. Open [https://shell.azure.com](shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
+
+```
+# Create resource group
+az group create --name ${USER}Ready18AKSCluster --location eastus
+
+# Create AKS cluster (this operation can take several minutes)
+az aks create --resource-group ${USER}Ready18AKSCluster --name ${USER}AKSCluster --node-count 1 --generate-ssh-keys
+```
+*If you run into errors with duplicate resource group or cluster name replace **${USER}** in the commands above with your Microsoft alias.* 
+
+
+
+
+## **Milestone 1: Standup Edge enabled VM on Azure**
 
 For this workshop you will standup Data Science Ubuntu VM and this VM will be the IoT Edge Device.
 
@@ -84,7 +101,7 @@ sudo iotedge list
 
 Congratulations, you have completed Milestone 1! On to the next...
 
-## Milestone 2: Deploy a custom module
+## **Milestone 2: Deploy a custom module**
 
 In this milestone, we'll deploy a simulated temperature sensor module on the Edge device. 
 
@@ -120,10 +137,10 @@ Verify data is being sent upstream to IoT Hub
 
 Milestone 2 complete! 
 
-## Milestone 3: Deploy IoT Edge AI module using Kubernetes
+## **Milestone 3: Deploy IoT Edge AI module using Kubernetes**
 
 ### Standup an AKS cluster
->If you have completed these steps as part of the pre-work, you can move on to the next step.
+>If you have completed these steps as part of the pre-work, you can move on to the next step (Verify cluster creation).
 
 1. Open [https://shell.azure.com](shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
 
@@ -239,12 +256,14 @@ The IoT Edge Kubernetes connector allows expressing IoT Edge module deployment a
 
 Milestone 3 complete!
 
-## Milestone 4: At scale deployments with Kubernetes.
+## **Milestone 4: At scale deployments with Kubernetes**
 The power of Kubernetes becomes clear when doing at-scale deployments. Consider a common scenario - you have multiple IoT Hub all over the world and want the same *fruity-ai* configuration on all of them. With Kubernetes this is literally a one command operation! Let's see how.
 
 1. Create a new IoT Hub and VM Edge device following steps in Milestone 1.
 
-2. Create a new secrets store **my-secrets1** and store the Owner connection string for the new hub in **hub1-cs**.
+2. Add the same tag to edge device as in Milestone 3.
+
+2. Create a new secrets store **my-secrets1** and save the Owner connection string for the new hub in **hub1-cs**.
     ```
     kubectl create secret generic my-secrets1 --from-literal=hub1-cs='replace-with-2nd-hub-owner-connection-string'
     ```
@@ -264,7 +283,7 @@ The power of Kubernetes becomes clear when doing at-scale deployments. Consider 
       tag: 0.3
       pullPolicy: Always
     env:
-      nodeName: iot-edge-connector-hub0
+      nodeName: iot-edge-connector-hub1
       nodeTaint:
     # Install Default RBAC roles and bindings
     rbac:
@@ -275,4 +294,39 @@ The power of Kubernetes becomes clear when doing at-scale deployments. Consider 
       # Cluster role reference
       roleRef: cluster-admin
     ```
-4. Use Helm to install another IoT Edge connector virtual node that is backed by the 2nd IoT Hub.
+4. Use Helm to install another IoT Edge connector virtual node that is backed by the 2nd IoT Hub by pointing it to file created in the previous step.
+
+    ```
+    helm install -n hub1 --set rbac.install=true charts/iot-edge-connector/ -f ./values.yaml
+    ```
+
+    In a few seconds, `kubectl get nodes` will show the new virtual node.
+
+    ![twohubs](images/2ndhub.png)
+
+
+5. Scale the deployment to two replicas of the deployment specification. The second replica will be scheduled on the new virtual node and sent to the backing 2nd IoT hub.
+
+    ```
+    kubectl scale deployment fruity-ai --replicas=2
+    ```
+
+    You should now see the new deployment show up in the 2nd hub, and get applied to the device in it.
+
+Any updates to the deployment from Kubernetes will now reflect in both IoT hubs, allowing you to manage devices at scale.
+
+If you've made it till here, you're awesome! Check out the additional resources for more information.
+
+##Additional resources:
+* [Azure IoT Edge documentation](https://docs.microsoft.com/en-us/azure/iot-edge/about-iot-edge)
+* [IoT Edge Github repo](https://github.com/azure/iotedge)
+* [IoT Edge integration with Kubernetes](https://azure.microsoft.com/en-us/blog/manage-azure-iot-edge-deployments-with-kubernetes/)
+
+* Kubernetes integration Channel 9 video:
+    <iframe src="https://channel9.msdn.com/Shows/Internet-of-Things-Show/Kubernetes-integration-with-Azure-IoT-Edge/player" width="480" height="270" allowFullScreen frameBorder="0"></iframe>
+
+* [IoT Edge custom vision sample](https://azure.microsoft.com/en-us/resources/samples/custom-vision-service-iot-edge-raspberry-pi/)
+
+
+
+
