@@ -283,7 +283,7 @@ The power of Kubernetes becomes clear when doing at-scale deployments. Consider 
       port: 5000
       secretsStoreName: my-secrets1
       secretKey: hub1-cs
-    vkimage
+    vkimage:
       repository: microsoft/virtual-kubelet
       tag: 0.3
       pullPolicy: Always
