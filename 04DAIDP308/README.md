@@ -9,7 +9,7 @@ Azure IoT Edge moves cloud analytics and custom business logic to devices so tha
 
 ### Standup an AKS cluster
 
-1. Open [https://shell.azure.com](shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
+1. Open [https://shell.azure.com](https://shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
 
 ```
 # Create resource group
@@ -134,7 +134,7 @@ Milestone 2 complete!
 ### Standup an AKS cluster
 >If you have completed these steps as part of the pre-work, you can move on to the next step (Verify cluster creation).
 
-1. Open [https://shell.azure.com](shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
+1. Open [https://shell.azure.com](https://shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
 
 ```
 # Create resource group
