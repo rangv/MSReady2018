@@ -9,7 +9,7 @@ Azure IoT Edge moves cloud analytics and custom business logic to devices so tha
 
 ### Standup an AKS cluster
 
-1. Open [https://shell.azure.com](shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
+1. Open [https://shell.azure.com](https://shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
 
 ```
 # Create resource group
@@ -28,7 +28,7 @@ az aks create --resource-group ${USER}Ready18AKSCluster --name ${USER}AKSCluster
 For this workshop you will standup a Data Science Ubuntu VM and this VM will be the IoT Edge Device.
 
 Go to [Github Project and click **Deploy To Azure**](
-https://github.com/Azure/DataScienceVM/tree/master/Extensions/Iot
+https://github.com/Azure/DataScienceVM/tree/master/Extensions/IoT
 ).
 
 Fill out the custom deployment form per guidance in the figure below and click **Purchase**. 
@@ -134,7 +134,7 @@ Milestone 2 complete!
 ### Standup an AKS cluster
 >If you have completed these steps as part of the pre-work, you can move on to the next step (Verify cluster creation).
 
-1. Open [https://shell.azure.com](shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
+1. Open [https://shell.azure.com](https://shell.azure.com) in a new browser tab, and enter the following commands in the Bash prompt.
 
 ```
 # Create resource group
