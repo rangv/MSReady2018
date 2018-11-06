@@ -70,7 +70,7 @@ ssh <username>@<public-ip>
 In the SSH session, cd to **IotEdge** directory and execute **edge_configure.bat**
 
 ```bash
-cd /home/${USER}/IotEdge
+cd /home/${USER}/IoT/IotEdge
 bash edge_configure.sh
 ```
 
